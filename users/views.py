@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 
 from django.shortcuts import render, redirect 
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm 
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 
 def register_view(request):
@@ -12,7 +12,7 @@ def register_view(request):
             return redirect("")
     else:
         form = UserCreationForm()
-    return render(request, "users/register.html", {"form": form}) 
+    return render(request, "users/register.html", { "form": form })
 
 def login_view(request):
     return HttpResponse(b"Hello, world. You're at the polls index.")
