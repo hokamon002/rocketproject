@@ -8,10 +8,41 @@ Register a New User
 <h1>Register a New User</h1>
 <form class="form-with-validation" action="/users/register/" method="post">
   {% csrf_token %}
-   {% for fm in form %}
-            {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
-        {% endfor %}
+    {{form.username.label_tag}} {{form.username}} {{form.username.errors|striptags}}<br><br>
+    {{form.password1.label_tag}} {{form.password1}} {{form.password1.errors|striptags}}<br><br>
+    {{form.password2.label_tag}} {{form.password2}} {{form.password2.errors|striptags}}<br><br>
+
+  <input type="radio" id="new-team" name="team-register" value="new" checked onclick="toggleDivs()">
+  <label for="new-team">Create a new team</label><br>
+
+  <div id="new-team-input">
+    <label for="new-team-name">Enter a team name: </label>
+    <input id="new-team-name" name="enter-team-name" /> <br><br>
+  </div>
+
+  <input type="radio" id="existing-team" name="team-register" value="existing" onclick="toggleDivs()">
+  <label for="existing-team">Join an existing team</label><br>
+
+  <div id="existing-team-input" style="visibility:hidden">
+    {{form.team.label_tag}} {{form.team}}
+  </div><br>
 
   <button class="form-submit">Submit</button>
 </form>
+
+
+<script>
+    function toggleDivs() {
+        const newTeamDiv = document.getElementById('new-team-input');
+        const existingTeamDiv = document.getElementById('existing-team-input');
+        
+        if (document.getElementById('new-team').checked) {
+            newTeamDiv.style.visibility = 'visible';
+            existingTeamDiv.style.visibility = 'hidden';
+        } else if (document.getElementById('existing-team').checked) {
+            existingTeamDiv.style.visibility = 'visible';
+            newTeamDiv.style.visibility = 'hidden';
+        }
+    }
+</script>
 {% endblock %}
